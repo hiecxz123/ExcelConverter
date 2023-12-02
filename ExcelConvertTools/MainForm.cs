@@ -150,6 +150,13 @@ namespace ExcelConvertTools
         //创建CSharp文件
         private void GenerateCSharpFile_Click(object sender, System.EventArgs e)
         {
+            string exportCSharpPath = m_dataManager.systemConfig.exportCSharpPath;
+            //是否需要清理文件夹
+            if (ClearForderCheckBox.Checked)
+            {
+                FileManager.ClearForder(exportCSharpPath);
+            }
+            //生成复数的CSharp文件
             if (DataManager.m_systemConfig.options.pathType == Excel_PathType.UseExcelForder)
             {
                 List<string> filePaths = FileManager.GetAllExcelPaths(m_dataManager.systemConfig.excelsForderPath);
@@ -157,7 +164,7 @@ namespace ExcelConvertTools
                 {
                     m_dataManager.LoadExcel(filePaths[i], m_dataManager.systemConfig.options);
                     string fileName = System.IO.Path.GetFileNameWithoutExtension(filePaths[i]);
-                    m_dataManager.SaveCSharpFile(m_dataManager.systemConfig.exportCSharpPath, fileName);
+                    m_dataManager.SaveCSharpFile(exportCSharpPath, fileName);
                 }
                 MessageBox.Show("Generate " + filePaths.Count + " CSharp File Success!", "Status", MessageBoxButtons.OK);
             }
@@ -168,15 +175,21 @@ namespace ExcelConvertTools
                 m_dataManager.SaveCSharpFile(m_dataManager.systemConfig.exportCSharpPath, fileName);
                 MessageBox.Show("Generate CSharp File Success!", "Status", MessageBoxButtons.OK);
             }
-            
+
         }
         //创建Josn文件
         private void GenerateJsonFile_Click(object sender, System.EventArgs e)
         {
+            string exportJsonPath = m_dataManager.systemConfig.exportJsonPath;
+            if (ClearForderCheckBox.Checked)
+            {
+                FileManager.ClearForder(exportJsonPath);
+            }
+            //生成复数的Json文件
             if (DataManager.m_systemConfig.options.pathType == Excel_PathType.UseExcelForder)
             {
                 List<string> filePaths = FileManager.GetAllExcelPaths(m_dataManager.systemConfig.excelsForderPath);
-                if(filePaths.Count<=0)
+                if (filePaths.Count <= 0)
                 {
                     MessageBox.Show("There Is 0 Files In ExcelForder");
                     return;
@@ -185,7 +198,7 @@ namespace ExcelConvertTools
                 {
                     m_dataManager.LoadExcel(filePaths[i], m_dataManager.systemConfig.options);
                     string fileName = System.IO.Path.GetFileNameWithoutExtension(filePaths[i]);
-                    m_dataManager.SaveJsonFile(m_dataManager.systemConfig.exportJsonPath, fileName);
+                    m_dataManager.SaveJsonFile(exportJsonPath, fileName);
                 }
                 MessageBox.Show("Generate " + filePaths.Count + " Json File Success!", "Status", MessageBoxButtons.OK);
             }

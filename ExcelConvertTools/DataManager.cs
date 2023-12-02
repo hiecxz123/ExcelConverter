@@ -12,6 +12,7 @@ namespace ExcelConvertTools
 {
     public class SystemConfig
     {
+        public string version = "3";
         /// <summary>
         /// 多个excel文件所在文件夹
         /// </summary>

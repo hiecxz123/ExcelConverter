@@ -51,7 +51,17 @@ namespace ExcelConvertTools
             }
             return pathLists;
         }
+        /// <summary>
+        /// 清除文件夹内所有文件
+        /// </summary>
+        /// <param name="forderPath"></param>
+        public static void ClearForder(string forderPath)
+        {
+            if(IsForderExists(forderPath, forderPath+" Not Exists!"))
+            {
+                Directory.Delete(forderPath, false);
+            }
 
-
+        }
     }
 }
