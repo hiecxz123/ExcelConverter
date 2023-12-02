@@ -7,7 +7,7 @@ namespace ExcelConvertTools
     class FileManager
     {
 
-        public static bool IsForderExists(string forderPath)
+        public static bool IsForderExists(string forderPath, string falseInfo = "")
         {
             if (Directory.Exists(forderPath))
             {
@@ -15,6 +15,11 @@ namespace ExcelConvertTools
             }
             else
             {
+                if (falseInfo != "")
+                {
+                    MessageBox.Show(falseInfo, "Status", MessageBoxButtons.OK);
+                    return false;
+                }
                 MessageBox.Show("Forder Not Exists!!!", "Status", MessageBoxButtons.OK);
                 return false;
             }
@@ -36,7 +41,7 @@ namespace ExcelConvertTools
         public static List<string> GetAllExcelPaths(string forderPath)
         {
             List<string> pathLists = new List<string>();
-            if (IsForderExists(forderPath))
+            if (IsForderExists(forderPath,"ExcelForder Not Exists!!!"))
             {
                 string[] files = Directory.GetFiles(forderPath, "*.xls");
                 for (int i = 0; i < files.Length; i++)

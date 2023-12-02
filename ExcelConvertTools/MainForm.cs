@@ -176,6 +176,11 @@ namespace ExcelConvertTools
             if (DataManager.m_systemConfig.options.pathType == Excel_PathType.UseExcelForder)
             {
                 List<string> filePaths = FileManager.GetAllExcelPaths(m_dataManager.systemConfig.excelsForderPath);
+                if(filePaths.Count<=0)
+                {
+                    MessageBox.Show("There Is 0 Files In ExcelForder");
+                    return;
+                }
                 for (int i = 0; i < filePaths.Count; i++)
                 {
                     m_dataManager.LoadExcel(filePaths[i], m_dataManager.systemConfig.options);
